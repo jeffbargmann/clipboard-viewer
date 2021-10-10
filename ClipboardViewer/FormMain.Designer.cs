@@ -275,7 +275,8 @@
             // 
             // panelControlViews
             // 
-            this.panelControlViews.Controls.Add( this.tabControlViews );
+            this.panelControlViews.Controls.Add(this.linkSaveBinaryToDisk);
+            this.panelControlViews.Controls.Add(this.tabControlViews);
             this.panelControlViews.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControlViews.Location = new System.Drawing.Point( 0, 0 );
             this.panelControlViews.Name = "panelControlViews";
@@ -552,6 +553,19 @@
             this.buttonClearClipboard.UseVisualStyleBackColor = true;
             this.buttonClearClipboard.Click += new System.EventHandler( this.buttonClearClipboard_Click );
             // 
+            // linkSaveBinaryToDisk
+            // 
+            this.linkSaveBinaryToDisk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.linkSaveBinaryToDisk.AutoSize = true;
+            this.linkSaveBinaryToDisk.Location = new System.Drawing.Point(1000, 4);
+            this.linkSaveBinaryToDisk.Name = "linkSaveBinaryToDisk";
+            this.linkSaveBinaryToDisk.Size = new System.Drawing.Size(130, 25);
+            this.linkSaveBinaryToDisk.TabIndex = 9;
+            this.linkSaveBinaryToDisk.TabStop = true;
+            this.linkSaveBinaryToDisk.Text = "Save to disk";
+            this.linkSaveBinaryToDisk.Visible = false;
+            this.linkSaveBinaryToDisk.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkSaveBinaryToDisk_LinkClicked);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF( 6F, 13F );
@@ -643,6 +657,7 @@
         private System.Windows.Forms.CheckBox checkBoxXmlWrapAttributes;
         private System.Windows.Forms.Panel panelImageBackground;
         private System.Windows.Forms.PictureBox pictureBoxImageContent;
+        private System.Windows.Forms.LinkLabel linkSaveBinaryToDisk;
     }
 }
 

@@ -325,8 +325,9 @@ namespace ClipboardViewer
                         }
 
                         // Hex data view
-                        AddRemoveTabPage( tabPageHexData, ms != null );
-                        if( ms != null )
+                        linkSaveBinaryToDisk.Visible = ms != null;
+                        AddRemoveTabPage(tabPageHexData, ms != null);
+                        if (ms != null)
                         {
                             StringBuilder contentBuilder = new StringBuilder();
 
@@ -450,5 +451,30 @@ namespace ClipboardViewer
             e.Graphics.FillRectangle( new HatchBrush( HatchStyle.DiagonalCross, Color.LightGray, Color.White ), new Rectangle( new Point( 0, 0 ), panelImageBackground.Size ) );
         }
 
+        private void linkSaveBinaryToDisk_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            SaveFileDialog fs = new SaveFileDialog();
+            fs.OverwritePrompt = true;
+            if (fs.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    object data = _currentDataObject != null ? _currentDataObject.GetData((String)listFormats.SelectedItem, false) : null;
+                    if (data is MemoryStream)
+                    {
+                        using (FileStream file = new FileStream(fs.FileName, FileMode.Create, System.IO.FileAccess.Write))
+                            ((MemoryStream)data).CopyTo(file);
+                    }
+                    if (data is byte[])
+                    {
+                        File.WriteAllBytes(fs.FileName, (byte[])data);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An error occurred while attempting to save the data:\n\n" + ex.ToString(), Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
     }
 }
